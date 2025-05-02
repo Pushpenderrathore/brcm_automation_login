@@ -1,0 +1,12 @@
+[Unit]
+Description=Auto Login to Network Portal 
+After=network-online.target 
+Wants=network-online.target 
+
+[Service] 
+Type=oneshot 
+ExecStart=/usr/local/bin/autologin.sh
+RemainAfterExit=true 
+
+[Install] 
+WantedBy=multi-user.target 
