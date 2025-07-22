@@ -1,3 +1,6 @@
+![License](https://img.shields.io/badge/license-MIT-green) 
+![Last Commit](https://img.shields.io/github/last-commit/Pushpenderrathore/LUKS2-nuke)
+
 # 1. Clone the repository
 git clone https://github.com/Pushpenderrathore/brcm_automation_login
 
