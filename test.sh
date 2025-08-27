@@ -4,8 +4,7 @@
 nmcli device wifi connect "Bhabha 1"
 
 # Portal URL
-URL="http://10.10.10.1:8090/login.xml"
- 
+URL="http://10.10.10.1:8090/login.xml"   # this is the actual backend (not httpclient.html)
 
 # List of credentials (username:password)
 CREDENTIALS=(
@@ -31,12 +30,23 @@ for cred in "${CREDENTIALS[@]}"; do
 
   echo "Response:"
   echo "$RESPONSE"
-  echo "------------------------"
+  echo "-------------------------"
 
   if echo "$RESPONSE" | grep -q "LIVE"; then
-    echo "Logged in with $USERNAME"
+    echo "✅ Logged in with $USERNAME"
+
+    # --- Fix DNS after successful login ---
+    echo "🔧 Setting DNS to Google (8.8.8.8, 8.8.4.4)"
+    nmcli connection modify "Bhabha 1" ipv4.dns "8.8.8.8 8.8.4.4"
+    nmcli connection modify "Bhabha 1" ipv4.ignore-auto-dns yes
+    nmcli connection up "Bhabha 1"
+
+    echo "🌍 Testing connectivity..."
+    ping -c 3 8.8.8.8
+    ping -c 3 google.com
+
     break
   else
-    echo "Failed with $USERNAME, trying next..."
+    echo "❌ Failed with $USERNAME, trying next..."
   fi
 done
