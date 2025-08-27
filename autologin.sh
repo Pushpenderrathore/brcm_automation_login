@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Connect to network in case network is not saved
-nmcli device wifi connect "Wavion-1"
+nmcli device wifi connect "Bhabha 1"
 
 # Portal URL
 URL="http://10.10.10.1:8090/login.xml"
