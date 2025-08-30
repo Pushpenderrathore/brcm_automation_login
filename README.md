@@ -14,9 +14,3 @@ chmod +x install.sh
 # 4. Run the installer script
 sudo ./install.sh
 
-# For Windows run the command below as administrator in powershell (network must be saved before)
-<pre><code>$code = '$ts=[int][double]::Parse((Get-Date -UFormat %s));Invoke-RestMethod -Uri "http://10.10.10.1:8090/login.xml" -Method POST -Body @{mode="191";username="1";password="brcm@@12";a=$ts;producttype="0"}'
-
-$action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-ExecutionPolicy Bypass -WindowStyle Hidden -Command `$code`"
-$trigger = New-ScheduledTaskTrigger -AtStartup
-Register-ScheduledTask -TaskName "AutoCurlLogin" -Action $action -Trigger $trigger -RunLevel Highest -User "SYSTEM"</code></pre>
